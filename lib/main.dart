@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -81,11 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: (){},
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.menu),
           color: Colors.grey,
         ),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.menu,color: Colors.grey,), onPressed: (){})
+          IconButton(icon: Icon(Icons.more_vert,color: Colors.grey,), onPressed: (){})
         ],
       ),
       body: ListView(
@@ -204,9 +205,8 @@ class _MyHomePageState extends State<MyHomePage> {
             buildCard("ibrahim","Away",0),
             buildCard("ibrahim","online",0),
             buildCard("ibrahim","online",0),
-            buildCard("ibrahim","online",0),
-            buildCard("ibrahim","online",0),
-            buildCard("ibrahim","online",0),
+            buildCard("ibrahim","Away",0),
+            buildCard("ibrahim","Away",0),
             buildCard("ibrahim","online",0),
           ],)
         ],
@@ -264,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(height: 15.0),
           Expanded(
               child: Container(
-                width: 175.0,
+                width: 200.0,
                 decoration: BoxDecoration(
                     color: status == 'Away' ? Colors.grey: Colors.green,
                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.0),bottomRight: Radius.circular(10.0))
@@ -280,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      margin: cardIndex.isEven? EdgeInsets.fromLTRB(10.0, 0.0, 25.0, 10.0): EdgeInsets.fromLTRB(25.0, 0.0, 5.0, 10.0),
+      margin: cardIndex.isEven? EdgeInsets.fromLTRB(10.0, 0.0, 8.0, 10.0): EdgeInsets.fromLTRB(25.0, 0.0, 5.0, 10.0),
     );
   }
 
