@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import 'Constants.dart';
+
+void main() => runApp(new MyApp());
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -86,7 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.grey,
         ),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.more_vert,color: Colors.grey,), onPressed: (){})
+          IconButton(icon: Icon(Icons.more_vert,color: Colors.grey,), onPressed: _showPopupMenu
+          )
         ],
       ),
       body: ListView(
@@ -104,10 +106,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(25, 90, 25, 0),
+                  margin: EdgeInsets.fromLTRB(16, 80, 16, 0),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 2.0,
@@ -150,14 +152,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 60.0,
                         width: 160.0,
                         decoration: BoxDecoration(
-                            color: Colors.greenAccent[100].withOpacity(0.5),
+                            color: Color(0xff407cc3).withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10.0)),
                         child: Center(
                           child: Text('Buy more',
                               style: TextStyle(
                                   fontFamily: 'Quicksand',
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.green)),
+                                  color: Color(0xff407cc3))),
                         ),
                       )
                     ],
@@ -183,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(
                   'VIEW PAST SESSIONS',
                   style: TextStyle(
-                      color:  Colors.green,
+                      color:  Color(0xff407cc3),
                       fontFamily: 'Quicksand',
                       fontWeight: FontWeight.bold,
                       fontSize: 12.0
@@ -231,7 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 60.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30.0),
-                  color: Colors.green,
+                  color: Color(0xff407cc3),
                   image: DecorationImage(
                     image: NetworkImage(
                       'https://www.pexels.com/photo/adult-beard-boy-casual-220453/'
@@ -266,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Container(
                 width: 200.0,
                 decoration: BoxDecoration(
-                    color: status == 'Away' ? Colors.grey: Colors.green,
+                    color: status == 'Away' ? Colors.grey: Color(0xff407cc3),
                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10.0),bottomRight: Radius.circular(10.0))
                 ),
                 child: Center(
@@ -282,6 +284,36 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       margin: cardIndex.isEven? EdgeInsets.fromLTRB(10.0, 0.0, 8.0, 10.0): EdgeInsets.fromLTRB(25.0, 0.0, 5.0, 10.0),
     );
+  }
+
+
+  _showPopupMenu(){
+    showMenu<String>(
+      context: context,
+      position: RelativeRect.fromLTRB(25.0, 25.0, 0.0, 0.0),      //position where you want to show the menu on screen
+      items: [
+        PopupMenuItem<String>(
+            child: const Text(Constants.Settings), value: '1'),
+        PopupMenuItem<String>(
+            child: const Text(Constants.Logout), value: '2'),
+      ],
+      elevation: 8.0,
+    )
+        .then<void>((String itemSelected) {
+
+      if (itemSelected == null) return;
+
+      if(itemSelected == "1"){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(Constants.Settings +" is Clicked"),
+        ));
+      }else if(itemSelected == "2"){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(Constants.Logout +" is Clicked"),
+        ));
+      }
+
+    });
   }
 
 }
