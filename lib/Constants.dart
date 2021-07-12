@@ -1,4 +1,5 @@
 class Constants{
+
   static const String Settings = 'Setting';
   static const String NightMode = 'Night Mode';
   static const String AboutUs = 'About Us';
